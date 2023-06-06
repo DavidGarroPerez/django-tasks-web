@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% comment %} acá es donde se muestran las tareas  {% endcomment %}
+{% block content %}
+
+<main class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 mt-3">
+      <h1 class="text-center display-3 py-5">Todas las Tareas</h1>
+
+      <div style="max-height: 400px; overflow-y: auto;">
+        <ul class="list-group">
+
+          {% for task in tasks %}
+          <a class="list-group-item" href="{% url 'task_detail' task.id %}">
+            
+            <header class="d-flex justify-content-between">
+              {% if task.important %}
+              <h3 class="fw-bold text-success">{{task.title}}</h3>
+              {% else %}
+              <h3 class="fw-bold">{{task.title}}</h3>
+              {% endif %}
+              <p class="fw-bold text-dark">{{task.user.username}}</p>
+            </header>
+
+            <p>{{task.description}}</p>
+
+            <div><h6>Fecha de inicio de la tarea:</h6>{{task.datestart|date:'M j Y H:i'}}</div>
+            <br>
+            {% if task.datecompleted %}
+            <div><h6>Fecha de Finalización de la tarea:</h6>{{task.datecompleted|date:'M j Y H:i'}}</div>
+            {% endif %}
+
+          </a>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% comment %} aquí es donde se crean las tareas {% endcomment %}
+{% block content %}
+
+<main class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4 mt-4 py-5">
+
+        <form action="/create_task/" method="POST" class="card card-body">
+          <h1 class="text-center">Crear Tarea</h1>
+
+          {{error}}
+          {% csrf_token %}
+          <div class="form-group">
+            {{form.title.label_tag}}
+            {{form.title}}
+          </div>
+          <div class="form-group">
+            {{form.description.label_tag}}
+            {{form.description}}
+          </div>
+          <br>
+          <div class="form-group">
+            {{form.datestart.label_tag}}
+            {{form.datestart}}
+          </div>
+          <br>
+          <div class="form-group">
+            {{form.important.label_tag}}
+            {{form.important}}
+          </div>
+          <br>
+          <button class="btn btn-primary mt-2">Guardar</button>
+        </form>
+    </div>
+  </div>
+</main> 
+
+{% endblock %}

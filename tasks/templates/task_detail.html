@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% comment %} acá es donde se modifican las tareas al seleccionar una  {% endcomment %}
+{% block content %}
+
+<main class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 mt-5 py-5">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="text-center">La Tarea es: <h2 class="text-secondary text-center">{{ task.title }}</h2></h1>
+
+          {{ error }}
+
+          <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary d-block mx-auto mt-3">Actualizar</button>
+          </form>
+
+          <div class="mt-5 d-flex justify-content-center">
+            <form action="{% url 'complete_task' task.id %}" method="POST">
+              {% csrf_token %}
+              <button class="btn btn-secondary">Completar</button>
+            </form>
+
+            <div style="width: 10px;"></div> 
+
+            <form action="{% url 'delete_task' task.id %}" method="POST">
+              {% csrf_token %}
+              <button class="btn btn-danger ml-2">Eliminar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
